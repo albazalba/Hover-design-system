@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {Button} from './components/Button1/Button1'
-import {Switch} from './components/ToggleSwitch/ToggleSwitch'
+import {Button} from './components/Button/Button'
+// import {Switch} from './components/ToggleSwitch/ToggleSwitch'
 import './App.css';
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     return (
         <div className="switch">
             <Button accent="success" variant="light" label="Button" />
-            <Switch onChange={(event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => setToggled(event.target.checked)} />
+            {/* <Switch onChange={(event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => setToggled(event.target.checked)} /> */}
 
         </div>
     )

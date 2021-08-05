@@ -2,10 +2,10 @@ import React from 'react';
 import {Story, Meta} from '@storybook/react';
 import {withDesign} from 'storybook-addon-designs';
 import {MdDelete} from 'react-icons/md'
-import {Button, ButtonProps} from '../components/Button1/Button1';
+import {Button, ButtonProps} from '../components/Button/Button';
 
 export default {
-	title: "Components/Button1",
+	title: "Components/Button",
 	component: Button,
 	decorators: [withDesign],
 	argTypes: {

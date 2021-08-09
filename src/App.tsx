@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {Button} from './components/Button/Button'
-// import {Switch} from './components/ToggleSwitch/ToggleSwitch'
 import './App.css';
 
 const App = () => {

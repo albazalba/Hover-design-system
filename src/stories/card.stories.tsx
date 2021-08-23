@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 import styled from '@emotion/styled';
 import {FiMoreVertical} from 'react-icons/fi'
-
+import {DropDown} from '../components/Dropdown/DropDown'
 import {
 	Card as CardComponent,
 	CardBody,
@@ -11,6 +11,7 @@ import {
     CardMedia,
     CardHeader
 } from "../components/Card/Card";
+import {List, ListItem, ListItemText} from '../components/List/List'
 
 import { Button } from "../components/Button/Button";
 export default {
@@ -34,7 +35,12 @@ Card.args = {
             <CardMedia image="https://domf5oio6qrcr.cloudfront.net/medialibrary/6000/8c38e37d-e8b9-48dd-a9a8-65083a6115e5.jpg" title = "image" />
             <div style={{display:"flex", justifyContent:"space-between"}}>
                 <CardHeader title="Title" subheader="Subheader" style={{fontSize:"50px"}}></CardHeader>
-                <Button icon={<FiMoreVertical />} accent="secondary" variant="ghost"/> 
+                <DropDown children={<Button icon={<FiMoreVertical />} accent="secondary" variant="ghost"/>} 
+				content={<List>
+					<ListItem>
+						<ListItemText primary="list1" />
+					</ListItem>	
+				</List>} /> 
             </div>
 			<CardBody>
 				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus

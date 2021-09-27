@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 import styled from '@emotion/styled';
 import {FiMoreVertical} from 'react-icons/fi'
-import {DropDown} from '../components/DropDown/DropDown'
+import {DropDown} from '../components/Dropdown/DropDown'
 import {
 	Card as CardComponent,
 	CardBody,

@@ -2,7 +2,7 @@ import React from "react";
 import { Story, Meta } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 
-import { DropDown as DropdownComponent } from "../../components/DropDown/DropDown";
+import { DropDown as DropdownComponent } from "../../components/Dropdown/DropDown";
 
 export default {
 	title: "Components/Dropdown",

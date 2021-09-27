@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/react";
 import { withDesign } from "storybook-addon-designs";
 import styled from '@emotion/styled';
 import {FiMoreVertical} from 'react-icons/fi'
-import {DropDown} from '../components/Dropdown/DropDown'
+import {DropDown} from '../components/DropDown/DropDown'
 import {
 	Card as CardComponent,
 	CardBody,
@@ -34,13 +34,18 @@ Card.args = {
 		<>
             <CardMedia image="https://domf5oio6qrcr.cloudfront.net/medialibrary/6000/8c38e37d-e8b9-48dd-a9a8-65083a6115e5.jpg" title = "image" />
             <div style={{display:"flex", justifyContent:"space-between"}}>
-                <CardHeader title="Title" subheader="Subheader" style={{fontSize:"50px"}}></CardHeader>
-                <DropDown children={<Button icon={<FiMoreVertical />} accent="secondary" variant="ghost"/>} 
-				content={<List>
-					<ListItem>
-						<ListItemText primary="list1" />
-					</ListItem>	
-				</List>} /> 
+                <CardHeader title="Title" subheader="Subheader" style={{fontSize:"50px"}}></CardHeader> 
+				<DropDown
+					buttonName={<FiMoreVertical />}
+					buttonStyle={{border:"none", height:"45px", width:"45px", borderRadius:"50%", margin:"5px" }}
+					list={[
+						{ label: 'Frenchy', onSelect: () => console.log("hii")},
+						{ label: 'Coco', onSelect: () => console.log("hii") },
+						{ label: 'Kit-Kat', onSelect: () => console.log("hii") },
+						{ label: 'Lei', onSelect: () => console.log("hii") },
+						{ label: 'Ankith', onSelect: () => console.log("hii") }
+					]}
+					/>
             </div>
 			<CardBody>
 				Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus

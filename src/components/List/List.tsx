@@ -3,27 +3,16 @@ import styled from "@emotion/styled";
 import { THEME } from "../../theme";
 import { CONSTANTS } from "../../constants";
 import { valueScaleCorrection } from "framer-motion/types/render/dom/projection/scale-correction";
+import { listenerCount } from "process";
+import ListStories from "../../stories/List/List.stories";
 // import { rgba } from "../components/Helper";
 
-export interface ACCENT {
-	primary: "primary";
-	secondary: "secondary";
-	image: "image";
-}
 
 export interface SIZE {
 	default: "default";
 	small: "small";
 	large: "large";
 	xtraLarge: "xtraLarge";
-}
-
-export interface VARIANT {
-	solid: "solid";
-	light: "light";
-	dark: "dark";
-	hallow: "hallow";
-	ghost: "ghost";
 }
 
 export interface List {
@@ -33,32 +22,73 @@ export interface List {
 
 export interface ListProps {
 	size?: SIZE[keyof SIZE] | any;
-	variant?: VARIANT[keyof VARIANT];
-	type?: "number" | "roman" | "bullet" | "image" | ReactNode;
-	accent?: ACCENT[keyof ACCENT];
 	children?: any;
-	imageUrl?: string;
 	alignment?: "horizontal" | "vertical";
-	imageSize?: string;
 	style?:any;
+	lists?: any;
 }
 
 export interface ListItemProps {
 	hoverEffect?: boolean;
 	size?: SIZE[keyof SIZE] | any;
-	variant?: VARIANT[keyof VARIANT];
-	accent?: ACCENT[keyof ACCENT];
 	children?: any;
-	imageUrl?: string;
 	disabled?: boolean;
 	style?:any;
 	onClick?: (event: React.MouseEvent<HTMLLIElement>) => any;
 }
 
+export interface ListItemTextProps {
+	children?: any;
+	primary?: string;
+	secondary?: string;
+	style?: any
+}
+
+export interface ListItemIconProps {
+	children?: any
+}
+
+export const List = (props: ListProps) => {
+	return (
+		<StyledList {...props}>
+			{props.lists.map((list: any) => (
+				<ListItem hoverEffect={list.hoverEffect} disabled={list.disabled}>
+					<ListItemIcon>{list.icon}</ListItemIcon>
+					<ListItemText primary={list.primaryText} secondary={list.secondaryText}/>
+				</ListItem>
+			 ) )}
+		</StyledList>
+	);
+};
+
+
+// li
+export const ListItem = (props: ListItemProps) => {
+	return (
+		<StyledListItem {...props}>
+			{props.children}
+		</StyledListItem>
+	);
+};
+
+export const ListItemText: React.FC<ListItemTextProps>= (props) => {
+	const {children, primary, secondary, style} = props
+	return <StyledListItemText>
+		<span className="primary-text">{primary}</span>
+		<span className="secondary-text">{secondary}</span>
+	</StyledListItemText>
+}
+
+export const ListItemIcon = (props: ListItemIconProps) => {
+	return <StyledListItemIcon {...props}>{props.children}</StyledListItemIcon>
+}
+
+
+
 const StyledList = styled.ul<ListProps>`
-	color: ${(props) => getFontColor(props.accent)};
 	list-style: decimal;
 	display: flex;
+	text-align: center;
 	flex-direction: ${(props) => getAlignment(props.alignment)};
 	font-size: ${(props) => getSize(props.size)};
 	margin:0;
@@ -75,15 +105,16 @@ const StyledList = styled.ul<ListProps>`
 `;
 
 const StyledListItem = styled.li<ListItemProps>`
-	width: 100%;
+	/* width: 100%; */
     display: flex;
+	flex: 1;
+	flex-wrap: wrap;
     position: relative;
     box-sizing: border-box;
     text-align: left;
     align-items: center;
     padding-top: 8px;
     padding-bottom: 8px;
-    justify-content: flex-start;
     text-decoration: none;
 	cursor: ${(props) => (props.disabled ? "not-allowed" : getCursor(props.hoverEffect))};
 	opacity:${(props) => (props.disabled ? "0.5" : "1")};
@@ -186,74 +217,17 @@ function getFontColor(accent: any) {
 	return value;
 }
 
-// ul or ol
-export const List = (props: ListProps) => {
-	const orderedType = ["roman", "number"];
-	const ordered =
-		props.type &&
-		typeof props.type === "string" &&
-		orderedType.includes(props.type)
-			? true
-			: false;
-	return (
-		<StyledList as={ordered ? "ol" : "ul"} {...props}>
-			{/* {props.children.map((c: any) => {
-				if (typeof props.type === "string") {
-					return c;
-				} else {
-					return (
-						<div style={{ display: "flex", alignItems: "center" }}>
-							{props.type}
-							{c}
-						</div>
-					);
-				}
-			})} */}
-			{props.children}
-		</StyledList>
-	);
-};
 
-// li
-export const ListItem = (props: ListItemProps) => {
-	return (
-		<StyledListItem {...props}>
-			{props.imageUrl && <img src={props.imageUrl} />}
-			{props.children}
-		</StyledListItem>
-	);
-};
 
-export interface ListItemIconProps {
-	children?: any
-}
-
-export const ListItemIcon = (props: ListItemIconProps) => {
-	return <StyledListItemIcon {...props}>{props.children}</StyledListItemIcon>
-}
 
 const StyledListItemIcon =styled.div`
 	display: flex;
 	justify-content: center;
 	color:rgba(0, 0, 0, 0.54);
 	padding-right:16px;
-	padding-left: 16px;
 	font-size: 20px;
 `
-export interface ListItemTextProps {
-	children?: any;
-	primary?: string;
-	secondary?: string;
-	style?: any
-}
 
-export const ListItemText: React.FC<ListItemTextProps>= (props) => {
-	const {children, primary, secondary, style} = props
-	return <StyledListItemText>
-		<span className="primary-text">{primary}</span>
-		<span className="secondary-text">{secondary}</span>
-	</StyledListItemText>
-}
 
 const StyledListItemText = styled.div`
 	font-size: 1rem;
